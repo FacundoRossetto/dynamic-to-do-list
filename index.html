@@ -10,12 +10,98 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- 1) View without pending tasks -->
+    <!-- 1) No pending tasks view -->
     <section class="without">
         <p>You don't have any pending tasks...</p>
         <img src="img/undraw.svg" alt="Image when you don't have any task">
     </section>
     
+    <!-- 2) Add tasks view  -->
+    <section class="section-2">
+        <div class="add-task hidden" id="add-div">
+            <div class="add">
+                <div class="enter">
+                    <button id="btn-icon" type="button">+</button>
+                    <input id="task" type="text" placeholder="Enter a new task" maxlength="80">
+                </div>
+                <form class="days">
+                    <label for="username">Remember me in:</label>
+                    <select name="" id="days">
+                        <option value="1">1 day</option>
+                        <option value="2">2 days</option>
+                        <option value="2">3 days</option>
+                        <option value="2">4 days</option>
+                        <option value="2">5 days</option>
+                        <option value="2">6 days</option>
+                        <option value="2">7 days</option>
+                        <option value="2">8 days</option>
+                        <option value="2">9 days</option>
+                        <option value="2">10 days</option>
+                        <option value="2">11 days</option>
+                        <option value="2">12 days</option>
+                        <option value="2">13 days</option>
+                        <option value="2">14 days</option>
+                        <option value="2">15 days</option>
+                        <option value="2">16 days</option>
+                        <option value="2">17 days</option>
+                        <option value="2">18 days</option>
+                        <option value="2">19 days</option>
+                        <option value="2">20 days</option>
+                        <option value="2">21 days</option>
+                        <option value="2">22 days</option>
+                        <option value="2">23 days</option>
+                        <option value="2">24 days</option>
+                        <option value="2">25 days</option>
+                        <option value="2">26 days</option>
+                        <option value="2">27 days</option>
+                        <option value="2">28 days</option>
+                        <option value="2">29 days</option>
+                        <option value="2">30 days</option>
+                        <option value="2">31 days</option>
+                    </select>
+                </form>
+                <button id="add-btn" type="submit"><b>Add</b></button>
+            </div>
+            <!-- Icons dropdwn menu -->
+            <div id="icon-div" class="icons-menu hidden">
+                <div class="icon-row">
+                    <img class="icon" src="img/alarm-clock.png" alt="Alarm clock">
+                    <img class="icon" src="img/apps-add.png" alt="Apps add">
+                    <img class="icon" src="img/books.png" alt="Books">
+                </div>
+                <div class="icon-row">
+                    <img class="icon" src="img/briefcase.png" alt="Briefcase">
+                    <img class="icon" src="img/bulb.png" alt="Bulb">
+                    <img class="icon" src="img/computer.png" alt="Computer">
+                </div>
+                <div class="icon-row">
+                    <img class="icon" src="img/edit.png" alt="Edit">
+                    <img class="icon" src="img/envelope.png" alt="Envelope">
+                    <img class="icon" src="img/exclamation.png" alt="Exclamation">
+                </div>
+                <div class="icon-row">
+                    <img class="icon" src="img/eye.png" alt="Eye">
+                    <img class="icon" src="img/film.png" alt="Film">
+                    <img class="icon" src="img/graduation-cap.png" alt="Graduation cap">
+                </div>
+                <div class="icon-row">
+                    <img class="icon" src="img/heart.png" alt="Heart">
+                    <img class="icon" src="img/home.png" alt="Home">
+                    <img class="icon" src="img/marker.png" alt="Marker">
+                </div>
+                <div class="icon-row">
+                    <img class="icon" src="img/phone-call.png" alt="Phone call">
+                    <img class="icon" src="img/restaurant.png" alt="Restaurant">
+                    <img class="icon" src="img/shopping-cart.png" alt="Shopping cart">
+                </div>
+                <div class="icon-row">
+                    <img class="icon" src="img/sparkles.png" alt="Sparkles">
+                    <img class="icon" src="img/thumbtack.png" alt="Thumbtack">
+                    <img class="icon" src="img/users-alt.png" alt="Users alt">
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script src="main.js"></script>
 </body>
