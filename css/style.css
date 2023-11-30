@@ -32,3 +32,120 @@ body {
     width: 250px;
     margin-top: 200px;
 }
+
+.section-2 {
+    display: flex;
+    justify-content: center;
+}
+
+.add-task {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 10px;
+    background: #4cd382;
+    border-radius: 10px;
+    z-index: 999;
+    max-width: 600px;
+}
+
+.add-task button {
+    width: 80px;
+    padding: 5px;
+    border: 0px solid #333;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.add {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: #9dd34c;
+    border-radius: 10px;
+    z-index: 999;
+}
+
+.enter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    gap: 15px;
+}
+
+.enter button {
+    width: 70px;
+    height: 70px;
+    margin: 0px 0px 0px 7px;
+    border-radius: 50%;
+    font-size: 25px;
+    background-color: #824cd3;
+    background-position: center;
+    color: #333;
+    cursor: pointer;
+}
+
+.enter input {
+    width: 230px;
+    height: 65px;
+    padding: 0px 0px 20px 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+.days {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 15px;
+    padding: 10px 0px;
+}
+
+.days select {
+    margin: 0px 10px;
+    border: none;
+    border-radius: 10px;
+    padding: 0px 0px 0px 5px;
+}
+
+.icons-menu {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 250px;
+    background: #4cd382;
+    border-radius: 10px;
+    z-index: 999;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.icon-row {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.icon {
+    max-width: 100px;
+    cursor: pointer;
+}
+
+
+
+.plus {
+    display: block;
+    width: 65px;
+    padding: 10px;
+    border: 0px solid #333;
+    border-radius: 60px;
+    font-size: 40px;
+    background-color: #9dd34c;
+    color: #333;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
