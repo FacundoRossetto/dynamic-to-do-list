@@ -12,11 +12,15 @@ let myTasks = document.getElementById("my-tasks")
 let container = document.querySelector(".container")
 let plusBtn = document.getElementById("plus-button")
 let defaultIcon = document.getElementById("default-icon")
+let taskText = document.getElementById("task-text")
+let expire = document.getElementById("expire")
 
 const iconImages = document.querySelectorAll(".icon")
-const oneDay = 1000*60*60*24 //One day in milliseconds
+let selectedIconUrl = ""
+const oneDay = 1000*60*60*24 // One day in milliseconds
+let actual = Date.now() // Actual time
 let tasksCounter = 0 // Counting tasks to assign them their ID
-let array = JSON.parse(localStorage.getitem("Tasks")) || [] // Tasks array
+let array = JSON.parse(localStorage.getItem("Tasks")) || [] // Tasks array
 
 
 
@@ -94,7 +98,7 @@ addBtn.addEventListener("click", () => {
                 background = "moredays"
             }
             // Task template:
-            let tempate = `
+            let template = `
             <div class="task ${background}" data-id="${element.id}">
                 <div class="task-title">
                    <img src="${element.image}" alt="Default icon" id="default-icon" class="defaultIcon"
@@ -121,7 +125,34 @@ addBtn.addEventListener("click", () => {
         })
 
     }else {
-        alert("Please write your task!")
+        alert("Please write a task :)")
     }
 })
 
+/* Removing completed tasks: */
+container.addEventListener("click", (event) => {
+    const doneBtn = event.target.closes(".doneBtn")
+    if (doneBtn) {
+        const taskID = doneBtn.closest(".task").dataset.id
+        // Show confirmation message:
+        const confirmationDiv = document.getElementById("confirmation")
+        confirmationDiv.classList.remove("hidden")
+
+        const yesBtn = document.getElementById("yes")
+        const noBtn = document.getElementById("no")
+
+        yesBtn.addEventListener("click", () => {
+            doneBtn.closest(".task").remove() // Removes task from DOM
+            array = array.filter((element) => element.id != taskID) // Removes task from array
+            localStorage.setItem("Tasks", JSON.stringify(array)) // Updates the local storage
+            if (array.length == 0) { // If zero tasks left, shows again "zero tasks" view
+                without.style.display = "block"
+            }
+            confirmationDiv.classList.add("hidden") // Closes confirmation message
+        })
+
+        noBtn.addEventListener("click", () => {
+            confirmationDiv.cllassList.add("hidden") // Closes confirmation message
+        })
+    }
+})

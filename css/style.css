@@ -16,6 +16,8 @@ body {
     background-color: #fafafa;
 }
 
+/* 1) No pending tasks */
+
 .without {
     display: flex;
     flex-direction: column;
@@ -34,6 +36,8 @@ body {
     width: 250px;
     margin-top: 200px;
 }
+
+/* 2) Addd tasks view */
 
 .section-2 {
     display: flex;
@@ -113,6 +117,8 @@ body {
     padding: 0px 0px 0px 5px;
 }
 
+/* Icons dropdown menu */
+
 .icons-menu {
     display: flex;
     justify-content: center;
@@ -145,6 +151,8 @@ body {
     max-width: 40px;
 }
 
+/* 3) Pending tasks view */
+
 .pending-tasks {
     margin-top: 10px;
     display: flex;
@@ -164,6 +172,44 @@ body {
     border-radius: 10px;
 }
 
+.task-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 320px;
+    background: #ede0d4;
+    border-radius: 10px;
+}
+
+.task-title p {
+    text-align: start;
+    width: 210px;
+    padding: 10px;
+}
+
+.days-left {
+    display: flex;
+    justify-content: space-between;
+    width: 320px;
+    margin-top: 10px;
+}
+
+.days-left p {
+    padding: 5px;
+    background: #ede0d4;
+    border-radius: 10px;
+}
+
+.days-left button {
+    padding: 5px;
+    background: #ede0d4;
+    border: 2px solid #333;
+    border-radius: 10px;
+    width: 80px;
+}
+
+
+/* + button */
 
 .plus {
     display: block;
@@ -180,6 +226,22 @@ body {
     right: 20px;
 }
 
+/* Hide elements class */
+
 .hidden {
     display: none;
+}
+
+/* Elapsed percentages classes */
+
+.moredays {
+    background: #90be6d;
+}
+
+.lessdays {
+    background: #f9c74f;
+}
+
+.oneday {
+    background: #f94144;
 }
