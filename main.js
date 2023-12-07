@@ -3,7 +3,7 @@
 let withoutView = document.getElementById("without")
 let addDiv = document.getElementById("add-div")
 let iconBtn = document.getElementById("btn-icon")
-let task = document.getElementById("task")
+let taskInput = document.getElementById("task")
 let addBtn = document.getElementById("add-btn")
 let days = document.getElementById("days")
 let iconDiv = document.getElementById("icon-div")
@@ -19,10 +19,8 @@ const iconImages = document.querySelectorAll(".icon")
 let selectedIconUrl = ""
 const oneDay = 1000*60*60*24 // One day in milliseconds
 let actual = Date.now() // Actual time
-let tasksCounter = 0 // Counting tasks to assign them their ID
+let tasksCounter = JSON.parse(localStorage.getItem("tasksCounter")) || 0 // Counting tasks to assign them their ID
 let array = JSON.parse(localStorage.getItem("Tasks")) || [] // Tasks array
-
-
 
 /* Button to show menu to add tasks: */
 
@@ -51,7 +49,7 @@ iconImages.forEach(icon => {
 /* Add task to the array & show it in DOM:  */
 
 addBtn.addEventListener("click", () => {
-    let whichTask = task.value
+    let whichTask = taskInput.value
     daysAmount = days.value
     created = Date.now()
     noticeIn = created + (oneDay*daysAmount)
@@ -60,7 +58,9 @@ addBtn.addEventListener("click", () => {
 
     if(whichTask != "") {
 
-        tasksCounter++ // Incrementing the counter to generate a new ID
+        // Incrementing the counter to generate a new ID:
+        tasksCounter++ 
+        localStorage.setItem("tasksCounter", JSON.stringify(tasksCounter))
 
         // Constructor function:
         function Object(id, image, title, days, time, created) {
@@ -117,7 +117,7 @@ addBtn.addEventListener("click", () => {
 
             //Resets:
             withoutView.style.display = "none" // Deletes "zero tasks" view
-            task.value = "" // Resets task input
+            taskInput.value = "" // Resets task input
             days.value = "1" // Resets days select
             iconBtn.style.backgroundImage = "none" //Resets task icon
             iconBtn.innerHTML = "+" // Puts back "+"
@@ -135,6 +135,7 @@ container.addEventListener("click", (event) => {
     const doneBtn = event.target.closest(".doneBtn")
     if (doneBtn) {
         const taskID = doneBtn.closest(".task").dataset.id
+        console.log(taskID)
         // Show confirmation message:
         const confirmationDiv = document.getElementById("confirmation")
         confirmationDiv.classList.remove("hidden")
@@ -146,8 +147,11 @@ container.addEventListener("click", (event) => {
             doneBtn.closest(".task").remove() // Removes task from DOM
             array = array.filter((element) => element.id != taskID) // Removes task from array
             localStorage.setItem("Tasks", JSON.stringify(array)) // Updates the local storage
-            if (array.length == 0) { // If zero tasks left, shows again "zero tasks" view
+            if (array.length === 0) { // If zero tasks left, shows again "zero tasks" view
                 withoutView.style.display = "block"
+                tasksCounter = 0 // Reset the counter if there are no tasks
+            } else {
+                tasksCounter = array[array.length - 1].id // Set counter to the last task's ID
             }
             confirmationDiv.classList.add("hidden") // Closes confirmation message
         })
