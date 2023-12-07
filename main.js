@@ -1,6 +1,6 @@
 /* Variables: */
 
-let without = document.querySelector(".without")
+let withoutView = document.getElementById("without")
 let addDiv = document.getElementById("add-div")
 let iconBtn = document.getElementById("btn-icon")
 let task = document.getElementById("task")
@@ -51,14 +51,14 @@ iconImages.forEach(icon => {
 /* Add task to the array & show it in DOM:  */
 
 addBtn.addEventListener("click", () => {
-    let whickTask = task.value
+    let whichTask = task.value
     daysAmount = days.value
     created = Date.now()
     noticeIn = created + (oneDay*daysAmount)
     passedTime = noticeIn - created
     finalTime = passedTime
 
-    if(whickTask != "") {
+    if(whichTask != "") {
 
         tasksCounter++ // Incrementing the counter to generate a new ID
 
@@ -80,7 +80,7 @@ addBtn.addEventListener("click", () => {
         }
 
         // Using function & completing object:
-        addObject(tasksCounter, selectedIconUrl, whickTask, daysAmount, finalTime, created)
+        addObject(tasksCounter, selectedIconUrl, whichTask, daysAmount, finalTime, created)
 
         // Creating tasks elements & display them in DOM:
         container.innerHTML = ""
@@ -101,13 +101,13 @@ addBtn.addEventListener("click", () => {
             let template = `
             <div class="task ${background}" data-id="${element.id}">
                 <div class="task-title">
-                   <img src="${element.image}" alt="Default icon" id="default-icon" class="defaultIcon"
+                   <img src="${element.image}" alt="Default icon" id="default-icon" class="defaultIcon">
                    <p id="task-text">${element.title}</p>
                 </div>
                 <div class="days-left">
                    <p>Remember me in: </p>
-                   <p id="expire">${element.days}</p>
-                   <p> days</p>
+                   <p class="expire" id="expire">${element.days}</p>
+                   <p> days.</p>
                    <button class="doneBtn"><b>Done!</b></button>
                 </div>
             </div>
@@ -116,7 +116,7 @@ addBtn.addEventListener("click", () => {
             container.innerHTML += template
 
             //Resets:
-            without.style.display = "none" // Deletes "zero tasks" view
+            withoutView.style.display = "none" // Deletes "zero tasks" view
             task.value = "" // Resets task input
             days.value = "1" // Resets days select
             iconBtn.style.backgroundImage = "none" //Resets task icon
@@ -125,13 +125,14 @@ addBtn.addEventListener("click", () => {
         })
 
     }else {
-        alert("Please write a task :)")
+        alert("Please enter a new task :)")
     }
 })
 
 /* Removing completed tasks: */
+
 container.addEventListener("click", (event) => {
-    const doneBtn = event.target.closes(".doneBtn")
+    const doneBtn = event.target.closest(".doneBtn")
     if (doneBtn) {
         const taskID = doneBtn.closest(".task").dataset.id
         // Show confirmation message:
@@ -146,13 +147,50 @@ container.addEventListener("click", (event) => {
             array = array.filter((element) => element.id != taskID) // Removes task from array
             localStorage.setItem("Tasks", JSON.stringify(array)) // Updates the local storage
             if (array.length == 0) { // If zero tasks left, shows again "zero tasks" view
-                without.style.display = "block"
+                withoutView.style.display = "block"
             }
             confirmationDiv.classList.add("hidden") // Closes confirmation message
         })
 
         noBtn.addEventListener("click", () => {
-            confirmationDiv.cllassList.add("hidden") // Closes confirmation message
+            confirmationDiv.classList.add("hidden") // Closes confirmation message
         })
     }
 })
+
+/* Get data from Local Storage: */
+
+if(localStorage.getItem("Tasks")){
+    container.innerHTML = ""
+    array = JSON.parse(localStorage.getItem("Tasks"))
+    array.forEach((element) => {
+        let background = ""
+        const now = Date.now()
+        const timeElapsed = now - element.created
+        const percentageElapsed = (timeElapsed / element.time) * 100
+        if (percentageElapsed >= 100) {
+            background = "oneday"
+        } else if (percentageElapsed >= 50) {
+            background = "lessdays"
+        } else {
+            background = "moredays"
+        }
+        let template = `
+            <div class="task ${background}" data-id="${element.id}">
+                <div class="task-title">
+                   <img src="${element.image}" alt="Default icon" id="default-icon" class="defaultIcon">
+                   <p id="task-text">${element.title}</p>
+                </div>
+                <div class="days-left">
+                   <p>Remember me in: </p>
+                   <p class="expire" id="expire">${element.days}</p>
+                   <p> days.</p>
+                   <button class="doneBtn"><b>Done!</b></button>
+                </div>
+            </div>
+            <br>
+            `
+            container.innerHTML += template
+            withoutView.style.display = "none"
+    })
+}
