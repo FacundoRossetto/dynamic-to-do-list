@@ -8,10 +8,35 @@ let addBtn = document.getElementById("add-btn")
 let days = document.getElementById("days")
 let iconDiv = document.getElementById("icon-div")
 let iconRow = document.querySelectorAll(".icon-row")
-const iconImages = document.querySelectorAll(".icon")
 let myTasks = document.getElementById("my-tasks")
 let container = document.querySelector(".container")
 let plusButton = document.getElementById("plus-button")
 
+const iconImages = document.querySelectorAll(".icon")
 
+
+
+/* Button to show menu to add tasks: */
+
+btnMas.addEventListener("click", () => {
+    addDiv.classList.toggle("hidden")
+})
+
+/* Button to show icons dropdown menu: */
+
+btnIcon.addEventListener("click", () => {
+    iconDiv.classList.toggle("hidden")
+    btnIcon.style.backgroundImage = `url('${selectedIconUrl}')`
+})
+
+/* Select icon: */
+
+iconImages.forEach(icon => {
+    icon.addEventListener("click", () => {
+        selectedIconUrl = icon.src
+        btnIcon.style.backgroundImage = `url('${selectedIconUrl}')`
+        btnIcon.innerHTML = ""
+        iconDiv.classList.add("hidden")
+    })
+})
 
